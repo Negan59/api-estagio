@@ -18,6 +18,7 @@ public class DAOAluguel {
             sql = sql.replace("$6", u.getTelefone());
             SingletonConexao con = SingletonConexao.getConexao();
             boolean flag = con.manipular(sql);
+            con.fecharConexao();
             return flag;
         } catch (Exception e) {
             System.out.println("Erro ao salvar no banco de dados: " + e.getMessage());
@@ -35,6 +36,7 @@ public class DAOAluguel {
         sql = sql.replace("$6", u.getTelefone());
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -57,6 +59,7 @@ public class DAOAluguel {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return Lista;
     }
 
@@ -81,6 +84,7 @@ public class DAOAluguel {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return aluguel;
     }
 
@@ -89,6 +93,7 @@ public class DAOAluguel {
             String sql = "DELETE FROM aluguel WHERE idAluguel = " + id;
             SingletonConexao con = SingletonConexao.getConexao();
             boolean flag = con.manipular(sql);
+            con.fecharConexao();
             return flag;
         } catch (Exception e) {
             System.out.println("Erro ao apagar registro do banco de dados: " + e.getMessage());

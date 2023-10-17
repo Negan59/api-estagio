@@ -28,7 +28,7 @@ public class DAOParoquiano {
                 con = SingletonConexao.getConexao();
                 flag = con.manipular(sql);
             }
-            
+            con.fecharConexao();
             return flag;
         } catch (Exception e) {
             // Aqui você pode tratar a exceção capturada
@@ -49,6 +49,7 @@ public class DAOParoquiano {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return novo;
     }
 
@@ -66,6 +67,7 @@ public class DAOParoquiano {
             con = SingletonConexao.getConexao();
             flag = con.manipular(sql);
         }
+        con.fecharConexao();
         return flag;
     }
 
@@ -78,6 +80,7 @@ public class DAOParoquiano {
             con = SingletonConexao.getConexao();
             flag = con.manipular(sql);
         }
+        con.fecharConexao();
         return flag;
 
     }
@@ -95,6 +98,7 @@ public class DAOParoquiano {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return Lista;
     }
 
@@ -110,6 +114,7 @@ public class DAOParoquiano {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return novo;
     }
 

@@ -14,6 +14,7 @@ public class DAOChave {
         SingletonConexao con = SingletonConexao.getConexao();
         System.out.println(sql);
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -21,6 +22,7 @@ public class DAOChave {
         String sql = "UPDATE chave SET nome_chave='" + chave.getNome() + "', Sala_idSala=" + chave.getSala().getId() + " WHERE idChave=" + chave.getId();
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -28,6 +30,7 @@ public class DAOChave {
         String sql = "DELETE FROM chave WHERE idChave=" + idChave;
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -46,6 +49,7 @@ public class DAOChave {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return novaChave;
     }
 
@@ -64,6 +68,7 @@ public class DAOChave {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return listaChaves;
     }
 
@@ -82,6 +87,7 @@ public class DAOChave {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return listaChaves;
     }
 }

@@ -14,6 +14,7 @@ public class DAOItensSalaoParoquial {
             sql = sql.replace("$1", u.getNome());
             SingletonConexao con = SingletonConexao.getConexao();
             boolean flag = con.manipular(sql);
+            con.fecharConexao();
             return flag;
         } catch (Exception e) {
             System.out.println("Erro ao salvar no banco de dados: " + e.getMessage());
@@ -26,6 +27,7 @@ public class DAOItensSalaoParoquial {
         sql = sql.replace("$1", p.getNome());
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -34,6 +36,7 @@ public class DAOItensSalaoParoquial {
         System.out.println(sql);
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -41,6 +44,7 @@ public class DAOItensSalaoParoquial {
         String sql = "update itemsalao set status = 1 where idItemSalao = "+id;
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -56,6 +60,7 @@ public class DAOItensSalaoParoquial {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return Lista;
     }
 
@@ -71,6 +76,7 @@ public class DAOItensSalaoParoquial {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return Lista;
     }
 
@@ -86,6 +92,7 @@ public class DAOItensSalaoParoquial {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return novo;
     }
 }

@@ -13,6 +13,7 @@ public class DAOSala {
         sql = sql.replace("$2", s.getDescricaosala());
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -22,6 +23,7 @@ public class DAOSala {
         sql = sql.replace("$2", s.getDescricaosala());
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -29,6 +31,7 @@ public class DAOSala {
         String sql = "delete from sala where idSala = "+id;
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -43,6 +46,7 @@ public class DAOSala {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return novo;
     }
 
@@ -58,6 +62,7 @@ public class DAOSala {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return Lista;
     }
 }

@@ -25,6 +25,7 @@ public class DAOEvento {
             sql = sql.replace("$A", u.getFoto());
             SingletonConexao con = SingletonConexao.getConexao();
             boolean flag = con.manipular(sql);
+            con.fecharConexao();
             return flag;
         } catch (Exception e) {
             // Aqui você pode tratar a exceção capturada
@@ -38,6 +39,7 @@ public class DAOEvento {
             String sql = "DELETE FROM evento WHERE idEvento = " + id;
             SingletonConexao con = SingletonConexao.getConexao();
             boolean flag = con.manipular(sql);
+            con.fecharConexao();
             return flag;
         } catch (Exception e) {
             System.out.println("Erro ao excluir evento no banco de dados: " + e.getMessage());
@@ -68,7 +70,7 @@ public class DAOEvento {
                 evento.setFoto(rs.getString("foto"));
                 eventos.add(evento);
             }
-
+            con.fecharConexao();
             return eventos;
         } catch (Exception e) {
             System.out.println("Erro ao buscar eventos no banco de dados: " + e.getMessage());
@@ -93,7 +95,7 @@ public class DAOEvento {
 
             SingletonConexao con = SingletonConexao.getConexao();
             boolean flag = con.manipular(sql);
-
+            con.fecharConexao();
             return flag;
         } catch (Exception e) {
             System.out.println("Erro ao atualizar no banco de dados: " + e.getMessage());
@@ -108,7 +110,7 @@ public class DAOEvento {
     
             SingletonConexao con = SingletonConexao.getConexao();
             boolean flag = con.manipular(sql);
-    
+            con.fecharConexao();
             return flag;
         } catch (Exception e) {
             System.out.println("Erro ao atualizar o aluguel no banco de dados: " + e.getMessage());

@@ -17,6 +17,7 @@ public class DAOLocal {
 
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -31,6 +32,7 @@ public class DAOLocal {
 
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -38,6 +40,7 @@ public class DAOLocal {
         String sql = "delete from local where idLocal = "+id;
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -62,7 +65,7 @@ public class DAOLocal {
         } catch (Exception e) {
             System.out.println(e);
         }
-    
+        con.fecharConexao();
         return novo;
     }
     
@@ -90,7 +93,7 @@ public class DAOLocal {
         } catch (Exception e) {
             System.out.println(e);
         }
-    
+        con.fecharConexao();
         return locais;
     }
     

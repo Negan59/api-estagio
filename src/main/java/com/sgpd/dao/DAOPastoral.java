@@ -17,6 +17,7 @@ public class DAOPastoral {
         sql = sql.replace("$4", ""+p.getDatacriacao());
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -28,6 +29,7 @@ public class DAOPastoral {
         sql = sql.replace("$4", ""+p.getDatacriacao());
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -36,6 +38,7 @@ public class DAOPastoral {
         sql = sql.replace("$1", ""+LocalDate.now());
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -43,6 +46,7 @@ public class DAOPastoral {
         String sql = "update pastoral set dataencerramento_pastoral = NULL where idPastoral = "+id;
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -57,6 +61,7 @@ public class DAOPastoral {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return novo;
     }
 
@@ -84,6 +89,7 @@ public class DAOPastoral {
         } catch (Exception e) {
             System.out.println("Erro ao buscar pastorais ativas: " + e);
         }
+        con.fecharConexao();
         return Lista;
     }
     
@@ -100,6 +106,7 @@ public class DAOPastoral {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return Lista;
     }
 

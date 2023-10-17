@@ -26,7 +26,7 @@ public class DAOFuncionario {
                 con = SingletonConexao.getConexao();
                 flag = con.manipular(sql);
             }
-            
+            con.fecharConexao();
             return flag;
         } catch (Exception e) {
             System.out.println("Erro ao salvar no banco de dados: " + e.getMessage());
@@ -46,6 +46,7 @@ public class DAOFuncionario {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return novo;
     }
 
@@ -63,6 +64,7 @@ public class DAOFuncionario {
             con = SingletonConexao.getConexao();
             flag = con.manipular(sql);
         }
+        con.fecharConexao();
         return flag;
     }
 
@@ -75,6 +77,7 @@ public class DAOFuncionario {
             con = SingletonConexao.getConexao();
             flag = con.manipular(sql);
         }
+        con.fecharConexao();
         return flag;
 
     }
@@ -84,6 +87,7 @@ public class DAOFuncionario {
         System.out.println(sql);
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -91,6 +95,7 @@ public class DAOFuncionario {
         String sql = "update funcionario set fun_status = 1 where Pessoa_idPessoa = "+id;
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
+        con.fecharConexao();
         return flag;
     }
 
@@ -107,6 +112,7 @@ public class DAOFuncionario {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return Lista;
     }
 
@@ -123,6 +129,7 @@ public class DAOFuncionario {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return Lista;
     }
 
@@ -138,6 +145,7 @@ public class DAOFuncionario {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.fecharConexao();
         return novo;
     }
 }
