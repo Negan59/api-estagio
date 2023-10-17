@@ -46,10 +46,11 @@ public class DAOChave {
                 Sala sala = dao.buscarUm(idSala); // Supondo que você tenha um método para buscar uma Sala pelo ID
                 novaChave = new Chave(rs.getInt("idChave"), rs.getString("nome_chave"), sala);
             }
+            rs.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
-        con.fecharConexao();
+        
         return novaChave;
     }
 
@@ -76,6 +77,7 @@ public class DAOChave {
         ArrayList<Chave> listaChaves = new ArrayList<>();
         String sql = "SELECT * FROM chave where Sala_idSala = "+id;
         SingletonConexao con = SingletonConexao.getConexao();
+        System.out.println(sql);
         ResultSet rs = con.consultar(sql);
         try {
             while (rs.next()) {

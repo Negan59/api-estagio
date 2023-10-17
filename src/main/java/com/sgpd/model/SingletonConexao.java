@@ -24,7 +24,6 @@ public class SingletonConexao {
             Class.forName(this.driver); //"org.postgresql.Driver");
             String url = this.local+this.banco; //"jdbc:postgresql://localhost/"+banco;
             connect = DriverManager.getConnection( url, this.usuario,this.senha);
-            System.out.println("chega aqui?");
         }
         catch ( ClassNotFoundException cnfex )
         { erro="Falha ao ler o driver JDBC: " + cnfex.toString();
@@ -37,6 +36,7 @@ public class SingletonConexao {
     }
 
     public static SingletonConexao getConexao(){
+        System.out.println(conexao);
         if(conexao == null){
             conexao = new SingletonConexao();
         }
@@ -99,14 +99,15 @@ public class SingletonConexao {
     }
     public boolean fecharConexao() {
         try {
-            connect.close();
-            connect = null;
+
+            conexao = null;
             return true;
         } catch (Exception e) {
             e.printStackTrace(); // ou faça algum tratamento de erro apropriado
             return false;
         }
     }
+    
     
 
 }
