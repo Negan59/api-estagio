@@ -97,20 +97,17 @@ public class SingletonConexao {
         }
         return max;
     }
-    public boolean fecharConexao()
-    {
-        boolean flag=true;
-        try
-        {
-        //connect.commit();
-        connect.close();
+    public boolean fecharConexao() {
+        try {
+            connect.close();
+            connect = null;
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace(); // ou faça algum tratamento de erro apropriado
+            return false;
         }
-        catch(Exception e)
-        {
-            flag=false;
-        }
-        return flag;
     }
+    
 
 }
 
