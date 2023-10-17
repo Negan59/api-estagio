@@ -28,7 +28,7 @@ import com.sgpd.model.TipoAtividade;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api") 
 public class Rotas {
 
     // Paroquiano
