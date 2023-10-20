@@ -90,7 +90,7 @@ public class DAOAluguel {
 
     public boolean apagar(int id) {
         try {
-            String sql = "DELETE FROM aluguel WHERE idAluguel = " + id;
+            String sql = "UPDATE aluguel SET disponibilidade = 0 WHERE idAluguel = " + id;
             SingletonConexao con = SingletonConexao.getConexao();
             boolean flag = con.manipular(sql);
             con.fecharConexao();

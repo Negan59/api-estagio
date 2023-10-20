@@ -3,6 +3,8 @@ package com.sgpd.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import com.sgpd.dao.DAOEvento;
+
 public class Evento {
     private int id;
     private String nomeevento;
@@ -16,9 +18,36 @@ public class Evento {
     private String observacao;
     private Aluguel aluguel;
     private String foto;
+    private boolean ativo;
 
-    public Evento(){
-        
+    public Evento(int id, String nomeevento, LocalDate dataevento, String horainicio, String horafim,
+            String horainiarrumacao, String horafimarrumacao, LocalDate dataarrumacao, String telefone,
+            String observacao, Aluguel aluguel, String foto, boolean ativo) {
+        this.id = id;
+        this.nomeevento = nomeevento;
+        this.dataevento = dataevento;
+        this.horainicio = horainicio;
+        this.horafim = horafim;
+        this.horainiarrumacao = horainiarrumacao;
+        this.horafimarrumacao = horafimarrumacao;
+        this.dataarrumacao = dataarrumacao;
+        this.telefone = telefone;
+        this.observacao = observacao;
+        this.aluguel = aluguel;
+        this.foto = foto;
+        this.ativo = ativo;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public Evento() {
+
     }
 
     public Evento(String nomeevento, LocalDate dataevento, String horainicio, String horafim, String horainiarrumacao,
@@ -194,23 +223,53 @@ public class Evento {
     }
 
     public boolean salvar() {
-        return false;
+        DAOEvento dao = new DAOEvento();
+        if (!dao.salvar(this)) {
+            return false;
+        }
+        return true;
     }
 
     public boolean alterar() {
-        return false;
+        DAOEvento dao = new DAOEvento();
+        if (!dao.atualizar(this)) {
+            return false;
+        }
+        return true;
     }
 
     public ArrayList<Evento> buscarTodos() {
-        return null;
+        DAOEvento dao = new DAOEvento();
+        return dao.buscarTodos();
     }
 
     public boolean apagar(int id) {
-        return false;
+        DAOEvento dao = new DAOEvento();
+        if (!dao.excluir(id)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean ativar(int id) {
+        DAOEvento dao = new DAOEvento();
+        if (!dao.ativar(id)) {
+            return false;
+        }
+        return true;
     }
 
     public Evento buscarUm(int id) {
-        return null;
+        DAOEvento dao = new DAOEvento();
+        return dao.buscarUm(id);
+    }
+
+    public boolean atualizarAluguel(Aluguel aluguel){
+        DAOEvento dao = new DAOEvento();
+        if(!dao.atualizarAluguel(aluguel,this.id)){
+            return false;
+        }
+        return true;
     }
 
 }

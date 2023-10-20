@@ -2,8 +2,8 @@ package com.sgpd.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 
+import com.sgpd.model.Aluguel;
 import com.sgpd.model.Evento;
 import com.sgpd.model.SingletonConexao;
 
@@ -36,7 +36,7 @@ public class DAOEvento {
 
     public boolean excluir(int id) {
         try {
-            String sql = "DELETE FROM evento WHERE idEvento = " + id;
+            String sql = "UPDATE evento SET ativo = 0 WHERE idEvento = " + id;
             SingletonConexao con = SingletonConexao.getConexao();
             boolean flag = con.manipular(sql);
             con.fecharConexao();
@@ -47,13 +47,13 @@ public class DAOEvento {
         }
     }
 
-    public List<Evento> buscarTodos() {
+    public ArrayList<Evento> buscarTodos() {
         try {
             String sql = "SELECT * FROM evento";
             SingletonConexao con = SingletonConexao.getConexao();
             ResultSet rs = con.consultar(sql);
 
-            List<Evento> eventos = new ArrayList<>();
+            ArrayList<Evento> eventos = new ArrayList<>();
 
             while (rs.next()) {
                 Evento evento = new Evento();
@@ -68,6 +68,7 @@ public class DAOEvento {
                 evento.setTelefone(rs.getString("telefone_evento"));
                 evento.setObservacao(rs.getString("observacao_evento"));
                 evento.setFoto(rs.getString("foto"));
+                evento.setAtivo(rs.getBoolean("ativo"));
                 eventos.add(evento);
             }
             con.fecharConexao();
@@ -75,6 +76,49 @@ public class DAOEvento {
         } catch (Exception e) {
             System.out.println("Erro ao buscar eventos no banco de dados: " + e.getMessage());
             return null;
+        }
+    }
+
+    public Evento buscarUm(int id){
+        try {
+            String sql = "SELECT * FROM evento where idEvento = "+id;
+            SingletonConexao con = SingletonConexao.getConexao();
+            ResultSet rs = con.consultar(sql);
+
+            Evento evento = new Evento();
+            while (rs.next()) {
+                
+                evento.setId(rs.getInt("id"));
+                evento.setNomeevento(rs.getString("nome_evento"));
+                evento.setDataevento(rs.getDate("data_evento").toLocalDate());
+                evento.setHorainicio(rs.getString("horainicio_evento"));
+                evento.setHorafim(rs.getString("horafim_evento"));
+                evento.setHorainiarrumacao(rs.getString("horainicio_arrumacao"));
+                evento.setHorafimarrumacao(rs.getString("horafim_arrumacao"));
+                evento.setDataarrumacao(rs.getDate("data_arrumacao").toLocalDate());
+                evento.setTelefone(rs.getString("telefone_evento"));
+                evento.setObservacao(rs.getString("observacao_evento"));
+                evento.setFoto(rs.getString("foto"));
+                evento.setAtivo(rs.getBoolean("ativo"));
+            }
+            con.fecharConexao();
+            return evento;
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar evento no banco de dados: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public boolean ativar(int id){
+        try {
+            String sql = "UPDATE evento SET ativo = 1 WHERE idEvento = " + id;
+            SingletonConexao con = SingletonConexao.getConexao();
+            boolean flag = con.manipular(sql);
+            con.fecharConexao();
+            return flag;
+        } catch (Exception e) {
+            System.out.println("Erro ao excluir evento no banco de dados: " + e.getMessage());
+            return false;
         }
     }
 
@@ -103,10 +147,10 @@ public class DAOEvento {
         }
     }
 
-    public boolean atualizarAluguel(Evento evento) {
+    public boolean atualizarAluguel(Aluguel aluguel, int id) {
         try {
-            String sql = "UPDATE Evento SET aluguel = $A WHERE id = " + evento.getId();
-            sql = sql.replace("$A", Integer.toString(evento.getAluguel().getId()));
+            String sql = "UPDATE Evento SET aluguel = $A WHERE id = " + id;
+            sql = sql.replace("$A", ""+aluguel.getId());
     
             SingletonConexao con = SingletonConexao.getConexao();
             boolean flag = con.manipular(sql);
