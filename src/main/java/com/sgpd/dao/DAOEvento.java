@@ -49,7 +49,7 @@ public class DAOEvento {
 
     public ArrayList<Evento> buscarTodos() {
         try {
-            String sql = "SELECT * FROM evento";
+            String sql = "SELECT * FROM evento where ativo = 1";
             SingletonConexao con = SingletonConexao.getConexao();
             ResultSet rs = con.consultar(sql);
 
@@ -78,6 +78,39 @@ public class DAOEvento {
             return null;
         }
     }
+
+    public ArrayList<Evento> buscarTodosInativos() {
+        try {
+            String sql = "SELECT * FROM evento where ativo = 0";
+            SingletonConexao con = SingletonConexao.getConexao();
+            ResultSet rs = con.consultar(sql);
+
+            ArrayList<Evento> eventos = new ArrayList<>();
+
+            while (rs.next()) {
+                Evento evento = new Evento();
+                evento.setId(rs.getInt("id"));
+                evento.setNomeevento(rs.getString("nome_evento"));
+                evento.setDataevento(rs.getDate("data_evento").toLocalDate());
+                evento.setHorainicio(rs.getString("horainicio_evento"));
+                evento.setHorafim(rs.getString("horafim_evento"));
+                evento.setHorainiarrumacao(rs.getString("horainicio_arrumacao"));
+                evento.setHorafimarrumacao(rs.getString("horafim_arrumacao"));
+                evento.setDataarrumacao(rs.getDate("data_arrumacao").toLocalDate());
+                evento.setTelefone(rs.getString("telefone_evento"));
+                evento.setObservacao(rs.getString("observacao_evento"));
+                evento.setFoto(rs.getString("foto"));
+                evento.setAtivo(rs.getBoolean("ativo"));
+                eventos.add(evento);
+            }
+            con.fecharConexao();
+            return eventos;
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar eventos no banco de dados: " + e.getMessage());
+            return null;
+        }
+    }
+
 
     public Evento buscarUm(int id){
         try {

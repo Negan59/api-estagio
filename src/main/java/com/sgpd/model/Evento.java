@@ -243,6 +243,11 @@ public class Evento {
         return dao.buscarTodos();
     }
 
+    public ArrayList<Evento> buscarTodosInativos() {
+        DAOEvento dao = new DAOEvento();
+        return dao.buscarTodosInativos();
+    }
+
     public boolean apagar(int id) {
         DAOEvento dao = new DAOEvento();
         if (!dao.excluir(id)) {
