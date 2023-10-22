@@ -42,4 +42,8 @@ public class ChaveController {
     public Chave buscarUmChave(int id) {
         return new Chave().buscarUm(id);
     }
+
+    public int quantidade(){
+        return new Chave().quantidade();
+    }
 }

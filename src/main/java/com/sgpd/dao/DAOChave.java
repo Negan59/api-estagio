@@ -58,6 +58,7 @@ public class DAOChave {
         ArrayList<Chave> listaChaves = new ArrayList<>();
         String sql = "SELECT * FROM chave limit "+((pagina-1)*10)+1+","+pagina*10;
         SingletonConexao con = SingletonConexao.getConexao();
+        System.out.println(sql);
         ResultSet rs = con.consultar(sql);
         try {
             while (rs.next()) {
@@ -91,5 +92,23 @@ public class DAOChave {
         }
         con.fecharConexao();
         return listaChaves;
+    }
+
+    public int quantidade(){
+        int qtd = 0;
+        String sql = "SELECT count(*) as qtd FROM chave";
+        SingletonConexao con = SingletonConexao.getConexao();
+        ResultSet rs = con.consultar(sql);
+        try {
+            if (rs.next()) {
+                qtd = rs.getInt("qtd");
+                
+            }
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
+        return qtd;
     }
 }

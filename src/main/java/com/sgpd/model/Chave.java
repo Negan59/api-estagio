@@ -80,5 +80,10 @@ public class Chave {
 
     }
 
+    public int quantidade(){
+        DAOChave dao = new DAOChave();
+        return dao.quantidade();
+    }
+
 
 }

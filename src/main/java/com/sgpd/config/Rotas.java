@@ -340,13 +340,18 @@ public class Rotas {
         return new ResponseEntity<>(new ChaveController().apagarChave(id), HttpStatus.OK);
     }
 
+    @GetMapping("/chave/quantidade")
+    public ResponseEntity<Object> buscarChaveQuantidade() {
+        return new ResponseEntity<>(new ChaveController().quantidade(), HttpStatus.OK);
+    }
+
     @GetMapping("/chave/{id}")
     public ResponseEntity<Chave> buscarUmChave(@PathVariable(value = "id") int id) {
         return new ResponseEntity<Chave>(new ChaveController().buscarUmChave(id), HttpStatus.OK);
     }
 
-    @GetMapping("/chave/{pagina}")
-    public ResponseEntity<Object> buscarTodosChave(@RequestParam("pagina")int pagina) {
+    @GetMapping("/chave/pagina/{pagina}")
+    public ResponseEntity<Object> buscarTodosChave(@PathVariable("pagina")int pagina) {
         return new ResponseEntity<>(new ChaveController().buscarTodosChave(pagina), HttpStatus.OK);
     }
 
@@ -365,6 +370,7 @@ public class Rotas {
     public ResponseEntity<Erro> atualizarEvento(@RequestBody Evento u) {
         return new ResponseEntity<>(new EventoController().alterar(u), HttpStatus.OK);
     }
+
 
     @PutMapping("/evento/agenda")
     public ResponseEntity<Erro> atualizarEventoAluguel(@RequestBody Aluguel u,@RequestParam("id") int id) {
