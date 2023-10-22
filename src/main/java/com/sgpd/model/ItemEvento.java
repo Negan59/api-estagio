@@ -1,5 +1,9 @@
 package com.sgpd.model;
 
+import java.util.ArrayList;
+
+import com.sgpd.dao.DAOItemEvento;
+
 public class ItemEvento {
     private ItensSalaoParoquial item;
     private Evento evento;
@@ -34,6 +38,43 @@ public class ItemEvento {
         this.evento = evento;
         this.quantidade = quantidade;
         this.reutilizavel = reutilizavel;
+    }
+    public ItemEvento() {
+    }
+
+    public boolean salvar(){
+        DAOItemEvento dao = new DAOItemEvento();
+        if(dao.salvar(this)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public boolean alterar(){
+        DAOItemEvento dao = new DAOItemEvento();
+        if(dao.alterar(this)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public ItemEvento buscarum(int idevento,int iditemsalao){
+        DAOItemEvento dao = new DAOItemEvento();
+        return dao.buscarUm(idevento, iditemsalao);
+    }
+
+    public ArrayList<ItemEvento> buscarTodosEvento(int id){
+        DAOItemEvento dao = new DAOItemEvento();
+        return dao.buscarTodosEvento(id);
+    }
+
+    public boolean apagar(int idevento, int idsalao){
+        DAOItemEvento dao = new DAOItemEvento();
+        return dao.apagar(idevento, idsalao);
     }
 
 

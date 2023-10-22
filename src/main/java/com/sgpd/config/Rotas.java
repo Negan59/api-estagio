@@ -10,6 +10,7 @@ import com.sgpd.control.AtividadeController;
 import com.sgpd.control.ChaveController;
 import com.sgpd.control.EventoController;
 import com.sgpd.control.FuncionarioController;
+import com.sgpd.control.ItemEventoController;
 import com.sgpd.control.ItensSalaoParoquialController;
 import com.sgpd.control.PadreController;
 import com.sgpd.control.ParoquianoController;
@@ -20,6 +21,7 @@ import com.sgpd.model.Chave;
 import com.sgpd.model.Erro;
 import com.sgpd.model.Evento;
 import com.sgpd.model.Funcionario;
+import com.sgpd.model.ItemEvento;
 import com.sgpd.model.ItensSalaoParoquial;
 import com.sgpd.model.Local;
 import com.sgpd.model.Padre;
@@ -389,4 +391,29 @@ public class Rotas {
         return new ResponseEntity<>(new EventoController().ativar(id), HttpStatus.OK);
     }
 
+    //item evento
+    @PostMapping("/itemevento")
+    public ResponseEntity<Erro> inserirItemEvento(@RequestBody ItemEvento u) {
+        return new ResponseEntity<>(new ItemEventoController().salvar(u), HttpStatus.OK);
+    }
+
+    @PutMapping("/itemevento")
+    public ResponseEntity<Erro> alterarItemEvento(@RequestBody ItemEvento u) {
+        return new ResponseEntity<>(new ItemEventoController().alterar(u), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/itemevento/{idevento}/{idsalao}")
+    public ResponseEntity<Erro> apagarItemEvento(@RequestParam("idevento")int idevento,@RequestParam("idsalao")int idsalao) {
+        return new ResponseEntity<>(new ItemEventoController().apagar(idevento,idsalao), HttpStatus.OK);
+    }
+
+    @GetMapping("/itemevento/{id}")
+    public ResponseEntity <Object> buscarTodosEventosItem(@RequestParam("id") int id){
+        return new ResponseEntity<>(new ItemEventoController().buscarTodosEvento(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/itemevento/{idevento}/{idsalao}")
+    public ResponseEntity <Object> buscarUmItemEvento(@RequestParam("idevento")int idevento,@RequestParam("idsalao")int idsalao){
+        return new ResponseEntity<>(new ItemEventoController().buscarum(idevento,idsalao), HttpStatus.OK);
+    }
 }
