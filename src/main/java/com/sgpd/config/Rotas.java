@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.sgpd.control.AgendaController;
+import com.sgpd.control.SalaController;
 import com.sgpd.control.AluguelController;
 import com.sgpd.control.AtividadeController;
 import com.sgpd.control.ChaveController;
@@ -64,27 +64,27 @@ public class Rotas {
     // sala
     @PostMapping("/sala")
     public ResponseEntity<Erro> inserirSala(@RequestBody Sala u) {
-        return new ResponseEntity<>(new AgendaController().salvarSala(u), HttpStatus.OK);
+        return new ResponseEntity<>(new SalaController().salvarSala(u), HttpStatus.OK);
     }
 
     @PutMapping("/sala")
     public ResponseEntity<Erro> alterarSala(@RequestBody Sala u) {
-        return new ResponseEntity<>(new AgendaController().alterarSala(u), HttpStatus.OK);
+        return new ResponseEntity<>(new SalaController().alterarSala(u), HttpStatus.OK);
     }
 
     @DeleteMapping("/sala/{id}")
     public ResponseEntity<Erro> apagarSala(@PathVariable(value = "id") int id) {
-        return new ResponseEntity<>(new AgendaController().apagarSala(id), HttpStatus.OK);
+        return new ResponseEntity<>(new SalaController().apagarSala(id), HttpStatus.OK);
     }
 
     @GetMapping("/sala/{id}")
     public ResponseEntity<Sala> buscarUmSala(@PathVariable(value = "id") int id) {
-        return new ResponseEntity<Sala>(new AgendaController().buscarUmSala(id), HttpStatus.OK);
+        return new ResponseEntity<Sala>(new SalaController().buscarUmSala(id), HttpStatus.OK);
     }
 
     @GetMapping("/sala")
     public ResponseEntity<Object> buscarTodosSala() {
-        return new ResponseEntity<>(new AgendaController().buscarTodosSala(), HttpStatus.OK);
+        return new ResponseEntity<>(new SalaController().buscarTodosSala(), HttpStatus.OK);
     }
 
     // pastoral

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.sgpd.model.Erro;
 import com.sgpd.model.Sala;
 
-public class AgendaController {
+public class SalaController {
     // Sala
     public Erro salvarSala(Sala sala) {
         if (!sala.getDescricaosala().isEmpty()) {
