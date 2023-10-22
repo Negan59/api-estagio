@@ -56,9 +56,9 @@ public class Chave {
 
     }
 
-    public ArrayList<Chave> buscarTodos() {
+    public ArrayList<Chave> buscarTodos(int pagina) {
         DAOChave dao = new DAOChave();
-        return dao.buscarTodos();
+        return dao.buscarTodos(pagina);
 
     }
 

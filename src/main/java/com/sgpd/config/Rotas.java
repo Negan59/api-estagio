@@ -345,9 +345,9 @@ public class Rotas {
         return new ResponseEntity<Chave>(new ChaveController().buscarUmChave(id), HttpStatus.OK);
     }
 
-    @GetMapping("/chave")
-    public ResponseEntity<Object> buscarTodosChave() {
-        return new ResponseEntity<>(new ChaveController().buscarTodosChave(), HttpStatus.OK);
+    @GetMapping("/chave/{pagina}")
+    public ResponseEntity<Object> buscarTodosChave(@RequestParam("pagina")int pagina) {
+        return new ResponseEntity<>(new ChaveController().buscarTodosChave(pagina), HttpStatus.OK);
     }
 
     @GetMapping("/chave/sala")

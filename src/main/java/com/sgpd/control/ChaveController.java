@@ -31,8 +31,8 @@ public class ChaveController {
         }
     }
 
-    public ArrayList<Chave> buscarTodosChave() {
-        return new Chave().buscarTodos();
+    public ArrayList<Chave> buscarTodosChave(int pagina) {
+        return new Chave().buscarTodos(pagina);
     }
 
     public ArrayList<Chave> buscarChavePorSala(int id) {
