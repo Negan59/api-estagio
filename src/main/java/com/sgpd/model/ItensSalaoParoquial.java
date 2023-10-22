@@ -82,6 +82,11 @@ public class ItensSalaoParoquial {
         return dao.buscarTodosInativos();
     }
 
+    public ArrayList<ItensSalaoParoquial> buscarDisponiveis(int idevento) {
+        DAOItensSalaoParoquial dao = new DAOItensSalaoParoquial();
+        return dao.buscarDisponiveis(idevento);
+    }
+
     public ItensSalaoParoquial buscarUm(int id) {
         DAOItensSalaoParoquial dao = new DAOItensSalaoParoquial();
         return dao.buscarUm(id);

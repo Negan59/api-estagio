@@ -95,4 +95,22 @@ public class DAOItensSalaoParoquial {
         con.fecharConexao();
         return novo;
     }
+
+    public ArrayList<ItensSalaoParoquial> buscarDisponiveis(int idevento){
+        ArrayList <ItensSalaoParoquial> lista = new ArrayList<>();
+        String sql = "SELECT isa.* FROM itemsalao isa"+
+        "LEFT JOIN itemevento ive on isa.idItemSalao != ive.ItemSalao_idItemSalao"+ 
+        "where isa.status = 1 and Evento_idEvento = "+idevento;
+        SingletonConexao con = SingletonConexao.getConexao();
+        ResultSet rs = con.consultar(sql);
+         try {
+            while (rs.next())
+                lista.add(
+                        new ItensSalaoParoquial(rs.getInt("idItemSalao"),rs.getString("nome_itemsalao")));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        con.fecharConexao();
+        return lista;
+    }
 }

@@ -283,6 +283,11 @@ public class Rotas {
         return new ResponseEntity<>(new ItensSalaoParoquialController().buscarTodosInativos(), HttpStatus.OK);
     }
 
+    @GetMapping("/itemsalao/disponiveis/{idevento}")
+    public ResponseEntity<Object> buscarTodosItensSalaoParoquialInativo(@RequestParam("idevento")int idevento) {
+        return new ResponseEntity<>(new ItensSalaoParoquialController().buscarDisponiveis(idevento), HttpStatus.OK);
+    }
+
     @PutMapping("/itemsalao/ativos/{id}")
     public ResponseEntity<Erro> ativarItensSalaoParoquial(@PathVariable(value = "id") int id) {
         return new ResponseEntity<>(new ItensSalaoParoquialController().desativar(id), HttpStatus.OK);

@@ -33,6 +33,10 @@ public class ItensSalaoParoquialController {
         return new ItensSalaoParoquial().buscarTodos();
     }
 
+    public ArrayList<ItensSalaoParoquial> buscarDisponiveis(int idevento) {
+        return new ItensSalaoParoquial().buscarDisponiveis(idevento);
+    }
+
     public ArrayList<ItensSalaoParoquial> buscarTodosInativos() {
         return new ItensSalaoParoquial().buscarTodosInativos();
     }
