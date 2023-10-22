@@ -8,6 +8,7 @@ import com.sgpd.control.AgendaController;
 import com.sgpd.control.AluguelController;
 import com.sgpd.control.AtividadeController;
 import com.sgpd.control.ChaveController;
+import com.sgpd.control.EventoController;
 import com.sgpd.control.FuncionarioController;
 import com.sgpd.control.ItensSalaoParoquialController;
 import com.sgpd.control.PadreController;
@@ -17,6 +18,7 @@ import com.sgpd.control.TipoAtividadeController;
 import com.sgpd.model.Aluguel;
 import com.sgpd.model.Chave;
 import com.sgpd.model.Erro;
+import com.sgpd.model.Evento;
 import com.sgpd.model.Funcionario;
 import com.sgpd.model.ItensSalaoParoquial;
 import com.sgpd.model.Local;
@@ -346,5 +348,45 @@ public class Rotas {
         return new ResponseEntity<>(new ChaveController().buscarChavePorSala(id), HttpStatus.OK);
     }
 
+    //evento
+    @PostMapping("/evento")
+    public ResponseEntity<Erro> inserirEvento(@RequestBody Evento u) {
+        return new ResponseEntity<>(new EventoController().salvar(u), HttpStatus.OK);
+    }
+
+    @PutMapping("/evento")
+    public ResponseEntity<Erro> atualizarEvento(@RequestBody Evento u) {
+        return new ResponseEntity<>(new EventoController().alterar(u), HttpStatus.OK);
+    }
+
+    @PutMapping("/evento/agenda")
+    public ResponseEntity<Erro> atualizarEventoAluguel(@RequestBody Aluguel u,@RequestParam("id") int id) {
+        return new ResponseEntity<>(new EventoController().atualizarAluguel(u,id), HttpStatus.OK);
+    }
+
+     @GetMapping("/evento/{id}")
+    public ResponseEntity<Evento> buscarUmEvento(@PathVariable(value = "id") int id) {
+        return new ResponseEntity<Evento>(new EventoController().buscarUm(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/evento")
+    public ResponseEntity<Object> buscarTodosEvento() {
+        return new ResponseEntity<>(new EventoController().buscarTodos(), HttpStatus.OK);
+    }
+
+    @GetMapping("/evento/inativo")
+    public ResponseEntity<Object> buscarTodosEventoInativo() {
+        return new ResponseEntity<>(new EventoController().buscarTodosInativos(), HttpStatus.OK);
+    }
+
+    @PostMapping("/evento/{id}")
+    public ResponseEntity<Erro> apagarEvento(@PathVariable(value = "id") int id) {
+        return new ResponseEntity<>(new EventoController().desativar(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/evento/desativar/{id}")
+    public ResponseEntity<Erro> ativarEvento(@PathVariable(value = "id") int id) {
+        return new ResponseEntity<>(new EventoController().ativar(id), HttpStatus.OK);
+    }
 
 }
