@@ -56,7 +56,7 @@ public class DAOChave {
 
     public ArrayList<Chave> buscarTodos(int pagina) {
         ArrayList<Chave> listaChaves = new ArrayList<>();
-        String sql = "SELECT * FROM chave limit "+(((pagina-1)*10)+1)+","+pagina*10;
+        String sql = "SELECT * FROM chave limit "+(((pagina-1)*10))+","+(pagina*10);
         SingletonConexao con = SingletonConexao.getConexao();
         System.out.println(sql);
         ResultSet rs = con.consultar(sql);
