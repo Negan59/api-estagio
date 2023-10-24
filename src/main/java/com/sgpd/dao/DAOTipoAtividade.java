@@ -52,6 +52,7 @@ public class DAOTipoAtividade {
         ArrayList<TipoAtividade> Lista = new ArrayList<>();
         String sql = "SELECT * FROM tipoatividade where status = 1;";
         SingletonConexao con = SingletonConexao.getConexao();
+        System.out.println(sql);
         ResultSet rs = con.consultar(sql);
         try {
             while (rs.next())
