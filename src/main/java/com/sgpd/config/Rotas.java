@@ -15,6 +15,7 @@ import com.sgpd.control.ItensSalaoParoquialController;
 import com.sgpd.control.PadreController;
 import com.sgpd.control.ParoquianoController;
 import com.sgpd.control.PastoralController;
+import com.sgpd.control.ReservaController;
 import com.sgpd.control.TipoAtividadeController;
 import com.sgpd.model.Aluguel;
 import com.sgpd.model.Chave;
@@ -27,6 +28,7 @@ import com.sgpd.model.Local;
 import com.sgpd.model.Padre;
 import com.sgpd.model.Paroquiano;
 import com.sgpd.model.Pastoral;
+import com.sgpd.model.Reserva;
 import com.sgpd.model.Sala;
 import com.sgpd.model.TipoAtividade;
 
@@ -414,17 +416,43 @@ public class Rotas {
     }
 
     @DeleteMapping("/itemevento/{idevento}/{idsalao}")
-    public ResponseEntity<Erro> apagarItemEvento(@RequestParam("idevento")int idevento,@RequestParam("idsalao")int idsalao) {
+    public ResponseEntity<Erro> apagarItemEvento(@PathVariable("idevento")int idevento,@PathVariable("idsalao")int idsalao) {
         return new ResponseEntity<>(new ItemEventoController().apagar(idevento,idsalao), HttpStatus.OK);
     }
 
     @GetMapping("/itemevento/{id}")
-    public ResponseEntity <Object> buscarTodosEventosItem(@RequestParam("id") int id){
+    public ResponseEntity <Object> buscarTodosEventosItem(@PathVariable("id") int id){
         return new ResponseEntity<>(new ItemEventoController().buscarTodosEvento(id), HttpStatus.OK);
     }
 
     @GetMapping("/itemevento/{idevento}/{idsalao}")
     public ResponseEntity <Object> buscarUmItemEvento(@RequestParam("idevento")int idevento,@RequestParam("idsalao")int idsalao){
         return new ResponseEntity<>(new ItemEventoController().buscarum(idevento,idsalao), HttpStatus.OK);
+    }
+
+    //reserva
+    @PostMapping("/reserva")
+    public ResponseEntity<Erro> inserirReserva(@RequestBody Reserva u) {
+        return new ResponseEntity<>(new ReservaController().salvar(u), HttpStatus.OK);
+    }
+
+    @PutMapping("/reserva")
+    public ResponseEntity<Erro> alterarReserva(@RequestBody Reserva u) {
+        return new ResponseEntity<>(new ReservaController().alterar(u), HttpStatus.OK);
+    }
+
+    @GetMapping("/reserva")
+    public ResponseEntity <Object> buscarTodosReserva(){
+        return new ResponseEntity<>(new ReservaController().buscarTodos(), HttpStatus.OK);
+    }
+
+    @GetMapping("/reserva/{id}")
+    public ResponseEntity <Object> buscarTodosReserva(@PathVariable("id")int id){
+        return new ResponseEntity<>(new ReservaController().buscarPorId(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/reserva/{id}")
+    public ResponseEntity <Object> apagarReserva(@PathVariable("id")int id){
+        return new ResponseEntity<>(new ReservaController().apagar(id), HttpStatus.OK);
     }
 }

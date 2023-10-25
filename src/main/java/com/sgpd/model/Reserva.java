@@ -1,6 +1,9 @@
 package com.sgpd.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+
+import com.sgpd.dao.DAOReserva;
 
 public class Reserva {
     private int id;
@@ -73,4 +76,39 @@ public class Reserva {
     }
     public Reserva() {
     }
+
+    public boolean salvar(){
+        DAOReserva dao = new DAOReserva();
+        if (dao.salvar(this)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean alterar(){
+        DAOReserva dao = new DAOReserva();
+        if (dao.alterar(this)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean apagar(int id){
+        DAOReserva dao = new DAOReserva();
+        if (dao.apagar(id)) {
+            return true;
+        }
+        return false;
+    }
+
+    public Reserva buscarPorId(int id){
+        DAOReserva dao = new DAOReserva();
+        return dao.buscarPorId(id);
+    }
+
+    public ArrayList<Reserva> buscarTodos(){
+        DAOReserva dao = new DAOReserva();
+        return dao.buscarTodos();
+    }
+
 }

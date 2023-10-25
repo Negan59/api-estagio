@@ -12,6 +12,7 @@ import com.sgpd.model.SingletonConexao;
 
 public class DAOReserva {
     public boolean salvar(Reserva reserva) {
+        System.out.println("chega aqui pelo menos?");
         String sql = "insert into reserva_sala (data_reserva,\n" + //
                 "horarioinicio_reserva,\n" + //
                 "horariofim_reserva,\n" + //
