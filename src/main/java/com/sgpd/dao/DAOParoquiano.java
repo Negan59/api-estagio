@@ -102,6 +102,25 @@ public class DAOParoquiano {
         return Lista;
     }
 
+    public ArrayList<Paroquiano> buscarTodosv2(int idpastoral) {
+        ArrayList<Paroquiano> Lista = new ArrayList<>();
+        String sql = "SELECT PA.*,PE.* FROM pessoa PE inner join paroquiano PA ON PE.idPessoa = PA.Pessoa_idPessoa \n"+
+        "INNER JOIN paroquiano_pastoral pas ON pas.Paroquiano_Pessoa_idPessoa = PE.idPessoa \n"+
+        "WHERE pas.Pastoral_idPastoral = "+idpastoral;
+        SingletonConexao con = SingletonConexao.getConexao();
+        ResultSet rs = con.consultar(sql);
+        try {
+            while (rs.next())
+                Lista.add(
+                        new Paroquiano(rs.getInt("idPessoa"), rs.getString("nome"), rs.getString("foto"),
+                                rs.getString("telefone"), rs.getString("email"), rs.getString("senha")));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        con.fecharConexao();
+        return Lista;
+    }
+
     public Paroquiano buscarUm(int id){
         Paroquiano novo = null;
         String sql = "SELECT * FROM pessoa PE inner join paroquiano PA where PE.idPessoa = PA.Pessoa_idPessoa AND PE.idPessoa = "+id;

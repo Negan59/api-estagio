@@ -58,6 +58,10 @@ public class ParoquianoController {
         return new Paroquiano().buscarTodos();
     }
 
+    public ArrayList<Paroquiano> buscarTodosv2(int idpastoral){
+        return new Paroquiano().buscarTodosv2(idpastoral);
+    }
+
     public Paroquiano buscarUm(int id){
         return new Paroquiano().buscarUm(id);
     }

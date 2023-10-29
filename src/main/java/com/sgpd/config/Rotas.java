@@ -65,6 +65,11 @@ public class Rotas {
         return new ResponseEntity<>(new ParoquianoController().buscarTodos(), HttpStatus.OK);
     }
 
+    @GetMapping("/paroquianov2/{idpastoral}")
+    public ResponseEntity<Object> buscarTodosParoquianov2(@PathVariable("idpastoral")int idpastoral) {
+        return new ResponseEntity<>(new ParoquianoController().buscarTodosv2(idpastoral), HttpStatus.OK);
+    }
+
     // sala
     @PostMapping("/sala")
     public ResponseEntity<Erro> inserirSala(@RequestBody Sala u) {

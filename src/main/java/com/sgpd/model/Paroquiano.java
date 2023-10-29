@@ -60,6 +60,11 @@ public class Paroquiano extends Pessoa {
         return dao.buscarTodos();
     }
 
+    public ArrayList<Paroquiano> buscarTodosv2(int idpastoral) {
+        DAOParoquiano dao = new DAOParoquiano();
+        return dao.buscarTodosv2(idpastoral);
+    }
+
     @Override
     public boolean apagar(int id) {
         DAOParoquiano dao = new DAOParoquiano();
