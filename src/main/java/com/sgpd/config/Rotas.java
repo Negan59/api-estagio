@@ -14,6 +14,7 @@ import com.sgpd.control.ItemEventoController;
 import com.sgpd.control.ItensSalaoParoquialController;
 import com.sgpd.control.PadreController;
 import com.sgpd.control.ParoquianoController;
+import com.sgpd.control.ParoquianoPastoralController;
 import com.sgpd.control.PastoralController;
 import com.sgpd.control.ReservaController;
 import com.sgpd.control.TipoAtividadeController;
@@ -27,6 +28,7 @@ import com.sgpd.model.ItensSalaoParoquial;
 import com.sgpd.model.Local;
 import com.sgpd.model.Padre;
 import com.sgpd.model.Paroquiano;
+import com.sgpd.model.ParoquianoPastoral;
 import com.sgpd.model.Pastoral;
 import com.sgpd.model.Reserva;
 import com.sgpd.model.Sala;
@@ -454,5 +456,32 @@ public class Rotas {
     @DeleteMapping("/reserva/{id}")
     public ResponseEntity <Object> apagarReserva(@PathVariable("id")int id){
         return new ResponseEntity<>(new ReservaController().apagar(id), HttpStatus.OK);
+    } 
+
+    //paroquiano pastoral
+    @PostMapping("/paroquianopastoral")
+    public ResponseEntity<Erro> inserirParoquianoPastoral(@RequestBody ParoquianoPastoral u) {
+        return new ResponseEntity<>(new ParoquianoPastoralController().salvar(u), HttpStatus.OK);
+    }
+
+    @PostMapping("/paroquianopastoral/encerrar")
+    public ResponseEntity<Erro> encerrarLigacaoParoquianoPastoral(@RequestBody ParoquianoPastoral u) {
+        return new ResponseEntity<>(new ParoquianoPastoralController().encerrarLigacao(u), HttpStatus.OK);
+    }
+
+    @PostMapping("/paroquianopastoral/reativar")
+    public ResponseEntity<Erro> reativarLigacaoParoquianoPastoral(@RequestBody ParoquianoPastoral u) {
+        return new ResponseEntity<>(new ParoquianoPastoralController().reativarLigacao(u), HttpStatus.OK);
+    }
+
+    @GetMapping("/paroquianopastoral/{id}")
+    public ResponseEntity <Object> buscarTodosParoquianoPastoral(@PathVariable("id")int id){
+        return new ResponseEntity<>(new ParoquianoPastoralController().buscarTodos(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/paroquianopastoral/buscarum/{idpastoral}/{idparoquiano}")
+    public ResponseEntity <Object> buscarUmParoquianoPastoral(@PathVariable("idpastoral")int idpastoral,
+    @PathVariable("idparoquiano")int idparoquiano){
+        return new ResponseEntity<>(new ParoquianoPastoralController().buscarUm(idpastoral,idparoquiano), HttpStatus.OK);
     }
 }
