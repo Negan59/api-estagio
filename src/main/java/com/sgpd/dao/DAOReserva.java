@@ -18,14 +18,15 @@ public class DAOReserva {
                 "horariofim_reserva,\n" + //
                 "Paroquiano_pastoral_Pastoral_idPastoral,\n" + //
                 "Paroquiano_pastoral_Paroquiano_Pessoa_idPessoa,\n" + //
-                "Sala_idSala) values ($1,'$2',$3,'$4',$5,$6)";
+                "Sala_idSala) values ('$1','$2','$3',$4,$5,$6)";
         sql = sql.replace("$1", "" + reserva.getData());
         sql = sql.replace("$2", reserva.getHorainicio());
         sql = sql.replace("$3", reserva.getHorafim());
         sql = sql.replace("$4", "" + reserva.getPastoral().getId());
-        sql = sql.replace("$4", "" + reserva.getParoquiano().getId());
-        sql = sql.replace("$4", "" + reserva.getSala().getId());
+        sql = sql.replace("$5", "" + reserva.getParoquiano().getId());
+        sql = sql.replace("$6", "" + reserva.getSala().getId());
         SingletonConexao con = SingletonConexao.getConexao();
+        System.out.println(sql);
         boolean flag = con.manipular(sql);
         con.fecharConexao();
         return flag;
@@ -39,7 +40,7 @@ public class DAOReserva {
                 "Paroquiano_pastoral_Pastoral_idPastoral = '$4', " +
                 "Paroquiano_pastoral_Paroquiano_Pessoa_idPessoa = $5, " +
                 "Sala_idSala = $6 " +
-                "where id = $7";
+                "where idReserva_Sala = $7";
         sql = sql.replace("$1", "" + reserva.getData());
         sql = sql.replace("$2", reserva.getHorainicio());
         sql = sql.replace("$3", reserva.getHorafim());
@@ -54,7 +55,7 @@ public class DAOReserva {
     }
 
     public boolean apagar(int id) {
-        String sql = "delete from reserva_sala where id = " + id;
+        String sql = "delete from reserva_sala where idReserva_Sala = " + id;
         SingletonConexao con = SingletonConexao.getConexao();
         boolean flag = con.manipular(sql);
         con.fecharConexao();
@@ -62,7 +63,7 @@ public class DAOReserva {
     }
 
     public Reserva buscarPorId(int id) {
-        String sql = "select * from reserva_sala where id = " + id;
+        String sql = "select * from reserva_sala where idReserva_Sala = " + id;
         SingletonConexao con = SingletonConexao.getConexao();
         ResultSet rs = con.consultar(sql);
         Reserva reserva = new Reserva();

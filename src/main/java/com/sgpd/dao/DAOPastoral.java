@@ -56,8 +56,17 @@ public class DAOPastoral {
         SingletonConexao con = SingletonConexao.getConexao();
         ResultSet rs = con.consultar(sql);
         try {
-            if (rs.next())
-                novo = new Pastoral(rs.getInt("idPastoral"), rs.getString("nome_pastoral"), rs.getString("descricao_pastoral"),new DAOParoquiano().buscarUm(rs.getInt("Coordenador_idPessoa")),rs.getDate("datacriacao_pastoral").toLocalDate(),rs.getDate("dataencerramento_pastoral").toLocalDate());
+            if (rs.next()){
+                System.out.println("achou alguma coisa");
+                Paroquiano paroquiano = new Paroquiano();
+                paroquiano.setId(rs.getInt("Coordenador_idPessoa"));
+                LocalDate dataencerramento = null;
+                if(rs.getDate("dataencerramento_pastoral") != null){
+                    dataencerramento = rs.getDate("dataencerramento_pastoral").toLocalDate();
+                }
+                novo = new Pastoral(rs.getInt("idPastoral"), rs.getString("nome_pastoral"), rs.getString("descricao_pastoral"),paroquiano,rs.getDate("datacriacao_pastoral").toLocalDate(),dataencerramento);
+            }
+
         } catch (Exception e) {
             System.out.println(e);
         }

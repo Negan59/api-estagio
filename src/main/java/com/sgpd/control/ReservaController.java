@@ -3,7 +3,10 @@ package com.sgpd.control;
 import java.util.ArrayList;
 
 import com.sgpd.model.Erro;
+import com.sgpd.model.Paroquiano;
+import com.sgpd.model.Pastoral;
 import com.sgpd.model.Reserva;
+import com.sgpd.model.Sala;
 
 public class ReservaController {
     public Erro salvar(Reserva reserva) {
@@ -75,10 +78,40 @@ public class ReservaController {
     }
 
     public ArrayList<Reserva> buscarTodos() {
-        return new Reserva().buscarTodos();
+        ArrayList<Reserva> reservas = new Reserva().buscarTodos();
+        for (Reserva reserva : reservas) {
+            Paroquiano paroquiano = new Paroquiano();
+            Paroquiano coordenador = new Paroquiano();
+            Sala sala = new Sala();
+            Pastoral pastoral = new Pastoral();
+            paroquiano = paroquiano.buscarUm(reserva.getParoquiano().getId());
+            pastoral = pastoral.buscarUm(reserva.getPastoral().getId());
+            sala = sala.buscarUm(reserva.getSala().getId());
+            coordenador = paroquiano.buscarUm(pastoral.getCoordenador().getId());
+            pastoral.setCoordenador(coordenador);
+            reserva.setPastoral(pastoral);
+            reserva.setParoquiano(paroquiano);
+            reserva.setSala(sala);
+            
+
+        }
+        return reservas;
     }
 
     public Reserva buscarPorId(int id) {
-        return new Reserva().buscarPorId(id);
+        Reserva reserva = new Reserva().buscarPorId(id);
+        Paroquiano paroquiano = new Paroquiano();
+        Paroquiano coordenador = new Paroquiano();
+        Sala sala = new Sala();
+        Pastoral pastoral = new Pastoral();
+        paroquiano = paroquiano.buscarUm(reserva.getParoquiano().getId());
+        pastoral = pastoral.buscarUm(reserva.getPastoral().getId());
+        sala = sala.buscarUm(reserva.getSala().getId());
+        coordenador = paroquiano.buscarUm(pastoral.getCoordenador().getId());
+        pastoral.setCoordenador(coordenador);
+        reserva.setPastoral(pastoral);
+        reserva.setParoquiano(paroquiano);
+        reserva.setSala(sala);
+        return reserva;
     }
 }
